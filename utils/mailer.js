@@ -67,7 +67,7 @@ async function welcomeMail(userEmail) {
       
                 <tr>
                   <td style="background-color: #114000 !important; padding: 20px; text-align: center;">
-                    <img style="max-width: 150px;" src="https://prowealth-inc.vercel.app/logo3.png" alt="Salesguru Logo">
+                    <img style="max-width: 150px;" src="https://salesguru.vercel.app/logo3.png" alt="Salesguru Logo">
                   </td>
                 </tr>
       
@@ -83,7 +83,7 @@ async function welcomeMail(userEmail) {
       
                 <tr>
                   <td style="background-color: #114000 !important; padding: 20px; text-align: center;">
-                    <img style="max-width: 100px; margin-bottom: 10px;" src="https://prowealth-inc.vercel.app/logo3.png" alt="Salesguru Logo">
+                    <img style="max-width: 100px; margin-bottom: 10px;" src="https://salesguru.vercel.app/logo3.png" alt="Salesguru Logo">
                     <p style="font-size: 12px; color: #fafafa !important; margin-bottom: 10px;">© 2023 Salesguru Company | All Rights Reserved</p>
                   </td>
                 </tr>
@@ -129,7 +129,7 @@ async function otpMail(userEmail, otp) {
     
               <tr>
                 <td style="background-color: #114000 !important; padding: 20px; text-align: center;">
-                  <img style="max-width: 150px;" src="https://prowealth-inc.vercel.app/logo3.png" alt="Salesguru Logo">
+                  <img style="max-width: 150px;" src="https://salesguru.vercel.app/logo3.png" alt="Salesguru Logo">
                 </td>
               </tr>
     
@@ -147,7 +147,7 @@ async function otpMail(userEmail, otp) {
     
               <tr>
                 <td style="background-color: #114000 !important; padding: 20px; text-align: center;">
-                  <img style="max-width: 100px; margin-bottom: 10px;" src="https://prowealth-inc.vercel.app/logo3.png" alt="Salesguru Logo">
+                  <img style="max-width: 100px; margin-bottom: 10px;" src="https://salesguru.vercel.app/logo3.png" alt="Salesguru Logo">
                   <p style="font-size: 12px; color: #fafafa !important; margin-bottom: 10px;">© 2023 Salesguru Company | All Rights Reserved</p>
                 </td>
               </tr>
@@ -194,7 +194,7 @@ async function passwordReset(userEmail) {
       
                 <tr>
                   <td style="background-color: #114000 !important; padding: 20px; text-align: center;">
-                    <img style="max-width: 150px;" src="https://prowealth-inc.vercel.app/logo3.png" alt="Salesguru Logo">
+                    <img style="max-width: 150px;" src="https://salesguru.vercel.app/logo3.png" alt="Salesguru Logo">
                   </td>
                 </tr>
       
@@ -211,7 +211,7 @@ async function passwordReset(userEmail) {
       
                 <tr>
                   <td style="background-color: #114000 !important; padding: 20px; text-align: center;">
-                    <img style="max-width: 100px; margin-bottom: 10px;" src="https://prowealth-inc.vercel.app/logo3.png" alt="Salesguru Logo">
+                    <img style="max-width: 100px; margin-bottom: 10px;" src="https://salesguru.vercel.app/logo3.png" alt="Salesguru Logo">
                     <p style="font-size: 12px; color: #fafafa !important; margin-bottom: 10px;">© 2023 Salesguru Company | All Rights Reserved</p>
                   </td>
                 </tr>
@@ -258,7 +258,7 @@ async function alertAdmin(email, amount, date, type) {
     
               <tr>
                 <td style="background-color: #114000 !important; padding: 20px; text-align: center;">
-                  <img style="max-width: 150px;" src="https://prowealth-inc.vercel.app/logo3.png" alt="Salesguru Logo">
+                  <img style="max-width: 150px;" src="https://salesguru.vercel.app/logo3.png" alt="Salesguru Logo">
                 </td>
               </tr>
     
@@ -273,7 +273,7 @@ async function alertAdmin(email, amount, date, type) {
     
               <tr>
                 <td style="background-color: #114000 !important; padding: 20px; text-align: center;">
-                  <img style="max-width: 100px; margin-bottom: 10px;" src="https://prowealth-inc.vercel.app/logo3.png" alt="Salesguru Logo">
+                  <img style="max-width: 100px; margin-bottom: 10px;" src="https://salesguru.vercel.app/logo3.png" alt="Salesguru Logo">
                   <p style="font-size: 12px; color: #fafafa !important; margin-bottom: 10px;">© 2023 Salesguru Company | All Rights Reserved</p>
                 </td>
               </tr>
@@ -320,7 +320,7 @@ async function depositMail(fullName, amount, email) {
       
                 <tr>
                   <td style="background-color: #114000 !important; padding: 20px; text-align: center;">
-                    <img style="max-width: 150px;" src="https://prowealth-inc.vercel.app/logo3.png" alt="Salesguru Logo">
+                    <img style="max-width: 150px;" src="https://salesguru.vercel.app/logo3.png" alt="Salesguru Logo">
                   </td>
                 </tr>
       
@@ -336,7 +336,7 @@ async function depositMail(fullName, amount, email) {
       
                 <tr>
                   <td style="background-color: #114000 !important; padding: 20px; text-align: center;">
-                    <img style="max-width: 100px; margin-bottom: 10px;" src="https://prowealth-inc.vercel.app/logo3.png" alt="Salesguru Logo">
+                    <img style="max-width: 100px; margin-bottom: 10px;" src="https://salesguru.vercel.app/logo3.png" alt="Salesguru Logo">
                     <p style="font-size: 12px; color: #fafafa !important; margin-bottom: 10px;">© 2023 Salesguru Company | All Rights Reserved</p>
                   </td>
                 </tr>
@@ -383,7 +383,7 @@ async function withdrawalMail(fullName, amount, date, email) {
       
                 <tr>
                   <td style="background-color: #114000 !important; padding: 20px; text-align: center;">
-                    <img style="max-width: 150px;" src="https://prowealth-inc.vercel.app/logo3.png" alt="Salesguru Logo">
+                    <img style="max-width: 150px;" src="https://salesguru.vercel.app/logo3.png" alt="Salesguru Logo">
                   </td>
                 </tr>
       
@@ -399,7 +399,7 @@ async function withdrawalMail(fullName, amount, date, email) {
       
                 <tr>
                   <td style="background-color: #114000 !important; padding: 20px; text-align: center;">
-                    <img style="max-width: 100px; margin-bottom: 10px;" src="https://prowealth-inc.vercel.app/logo3.png" alt="Salesguru Logo">
+                    <img style="max-width: 100px; margin-bottom: 10px;" src="https://salesguru.vercel.app/logo3.png" alt="Salesguru Logo">
                     <p style="font-size: 12px; color: #fafafa !important; margin-bottom: 10px;">© 2023 Salesguru Company | All Rights Reserved</p>
                   </td>
                 </tr>
@@ -446,7 +446,7 @@ async function productAlertMail(name, email, buyPrice, sellPrice, quantity) {
       
                   <tr>
                     <td style="background-color: #114000 !important; padding: 20px; text-align: center;">
-                      <img style="max-width: 150px;" src="https://prowealth-inc.vercel.app/logo3.png" alt="Salesguru Logo">
+                      <img style="max-width: 150px;" src="https://salesguru.vercel.app/logo3.png" alt="Salesguru Logo">
                     </td>
                   </tr>
       
@@ -468,7 +468,7 @@ async function productAlertMail(name, email, buyPrice, sellPrice, quantity) {
       
                   <tr>
                     <td style="background-color: #114000 !important; padding: 20px; text-align: center;">
-                      <img style="max-width: 100px; margin-bottom: 10px;" src="https://prowealth-inc.vercel.app/logo3.png" alt="Salesguru Logo">
+                      <img style="max-width: 100px; margin-bottom: 10px;" src="https://salesguru.vercel.app/logo3.png" alt="Salesguru Logo">
                       <p style="font-size: 12px; color: #fafafa !important; margin-bottom: 10px;">© 2023 Salesguru Company | All Rights Reserved</p>
                     </td>
                   </tr>
@@ -518,7 +518,7 @@ async function contactMail(fullName, email, message) {
       
                   <tr>
                     <td style="background-color: #114000 !important; padding: 20px; text-align: center;">
-                      <img style="max-width: 150px;" src="https://prowealth-inc.vercel.app/logo3.png" alt="Salesguru Logo">
+                      <img style="max-width: 150px;" src="https://salesguru.vercel.app/logo3.png" alt="Salesguru Logo">
                     </td>
                   </tr>
       
@@ -531,7 +531,7 @@ async function contactMail(fullName, email, message) {
       
                   <tr>
                     <td style="background-color: #114000 !important; padding: 20px; text-align: center;">
-                      <img style="max-width: 100px; margin-bottom: 10px;" src="https://prowealth-inc.vercel.app/logo3.png" alt="Salesguru Logo">
+                      <img style="max-width: 100px; margin-bottom: 10px;" src="https://salesguru.vercel.app/logo3.png" alt="Salesguru Logo">
                       <p style="font-size: 12px; color: #fafafa !important; margin-bottom: 10px;">© 2023 Salesguru Company | All Rights Reserved</p>
                     </td>
                   </tr>
