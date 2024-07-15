@@ -453,7 +453,7 @@ async function productAlertMail(name, email, buyPrice, sellPrice, quantity) {
                   <tr>
                     <td style="background-color: #ffffff; padding: 40px 20px;">
                       <p style="margin-bottom: 20px;">Hello</p>
-                      <p style="margin-bottom: 20px;">You have initiated a product arbitrage for <strong>${name}</strong> in your account. Your Estimated ROI will be credited automatically after 15 days</p>
+                      <p style="margin-bottom: 20px;">You have initiated a buy and resell order for <strong>${name}</strong> in your account. Your Estimated ROI will be credited automatically after 15 days</p>
                       <p style="margin-bottom: 20px;">Buy Price: $${buyPrice.toFixed(
                         2,
                       )}</p>
