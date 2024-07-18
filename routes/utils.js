@@ -18,6 +18,8 @@ router.get("/", async (req, res) => {
 router.put("/update/:id", async (req, res) => {
   const { id } = req.params;
 
+  console.log(req.body);
+
   try {
     const util = await Util.findByIdAndUpdate(
       id,
