@@ -67,11 +67,6 @@ const userSchema = new mongoose.Schema({
     default: 0,
     minLength: 0,
   },
-  withdrawn: {
-    type: Number,
-    default: 0,
-    minLength: 0,
-  },
   bonus: {
     type: Number,
     default: 0,

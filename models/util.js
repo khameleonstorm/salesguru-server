@@ -11,7 +11,14 @@ const utilSchema = new mongoose.Schema({
       price: Number
     }
   ], 
+
   rate: Number,
+
+  virtualAccount: {
+    accountName: String,
+    accountNumber: String,
+    bankName: String,
+  }
 });
 
 

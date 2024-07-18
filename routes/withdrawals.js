@@ -46,7 +46,7 @@ router.get('/user/:email', async(req, res) => {
 
 // making a withdrawal
 router.post('/', async (req, res) => {
-  const { id, amount, fullName, bankName, accountNumber } = req.body;
+  const { id, amount, amountInNaira, accountName, bankName, accountNumber } = req.body;
 
   const user = await User.findById(id);
   if (!user) return res.status(400).send({ message: 'Something went wrong' });
@@ -70,7 +70,7 @@ router.post('/', async (req, res) => {
     };
 
     const bankData = {
-      fullName,
+      accountName,
       accountNumber,
       bankName,
     };
@@ -84,7 +84,7 @@ router.post('/', async (req, res) => {
     const type = transaction.type;
     const email = transaction.user.email;
 
-    const emailData = await alertAdmin(email, amount, date, type);
+    const emailData = await alertAdmin(email, amountInNaira, date, type);
     if (emailData.error) return res.status(400).send({ message: emailData.error });
 
     res.send({ message: 'Withdraw successful and pending approval...' });
@@ -108,12 +108,6 @@ router.put('/:id', async (req, res) => {
 
   try {
     withdrawal.status = status;
-
-    if (status === 'success') {
-      user.withdraw(amount);
-    }
-
-    user = await user.save()
     withdrawal = await withdrawal.save()
 
     const { fullName, email } = user;

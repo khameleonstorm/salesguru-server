@@ -1,10 +1,7 @@
 const express = require('express')
-const mongoose = require('mongoose');
 const { Transaction } = require("../models/transaction")
 const { User } = require("../models/user")
-const { depositMail } = require("../utils/mailer")
-const Flutterwave = require('flutterwave-node-v3');
-const flw = new Flutterwave(process.env.FLTW_PUBLIC_KEY, process.env.FLTW_SECRET_KEY);
+const { alertAdmin, depositMail } = require("../utils/mailer")
 
 const router  = express.Router()
 
@@ -34,99 +31,45 @@ router.get('/user/:email', async(req, res) => {
 
 
 
+// making a deposit
 router.post('/', async (req, res) => {
-  const { id, amount, name, cardNumber, cvv, expiryMonth, expiryYear, rate } = req.body;
-  const amountInUsd = amount/rate
+  const { id, amount, amountInNaira } = req.body;
+
   const user = await User.findById(id);
   if (!user) return res.status(400).send({ message: 'Something went wrong' });
 
+  // Check if there's any pending deposit for the user
+  const pendingDeposit = await Transaction.findOne({
+    'user.id': id,
+    status: 'pending',
+    type: 'deposit',
+  });
 
-  const session = await mongoose.startSession();
-  session.startTransaction();
+  if (pendingDeposit) {
+    return res.status(400).send({ message: 'You have a pending deposit. Please wait for approval.' });
+  }
 
   try {
-    const payload = {
-      "card_number": cardNumber,
-      "cvv": cvv,
-      "expiry_month": expiryMonth,
-      "expiry_year": expiryYear,
-      "currency": "NGN",
-      "amount": amount,
-      "fullname": name,
-      "email": user.email,
-      "phone_number": user.phone,
-      "enckey": process.env.FLTW_ENC_KEY,
-      "tx_ref": `tx-${Date.now()}`,
-      "redirect_url": "https://www.savest-ltd.com",
-    };
-
-    const response = await flw.Charge.card(payload);
-
-    // Handle the response
-    if (response.status !== 'success') {
-      throw new Error(response.message);
-    }
-
-    // let finalResponse;
-    // if (response.meta.authorization.mode === 'pin') {
-    //   const pinPayload = {
-    //     ...payload,
-    //     authorization: {
-    //       mode: 'pin',
-    //       fields: ['pin'],
-    //       pin: '1234'
-    //     }
-    //   };
-
-    //   const reCallCharge = await flw.Charge.card(pinPayload);
-
-    //   finalResponse = await flw.Charge.validate({
-    //     otp: '12345',
-    //     flw_ref: reCallCharge.data.flw_ref,
-    //   });
-    // } else if (response.meta.authorization.mode === 'redirect') {
-    //   await session.commitTransaction();
-    //   session.endSession();
-    //   return res.send({ message: 'Please complete the payment on the redirected page', redirect_url: response.meta.authorization.redirect });
-    // } else {
-    //   finalResponse = response;
-    // }
-
-    // if (finalResponse.status !== 'success') {
-    //   throw new Error(finalResponse.message);
-    // }
-
     const userData = {
       id: user._id,
       email: user.email,
       name: user.fullName,
     };
 
-    const transaction = new Transaction({
-      type: 'deposit',
-      user: userData,
-      amount: amountInUsd,
-      status: 'success',
-    });
+    // Create a new deposit instance
+    const transaction = new Transaction({ type: 'deposit', user: userData, amount });
+    await transaction.save();
 
-    // Update the user's balance
-    user.balance += amount;
-    await user.save({ session });
-
-    await transaction.save({ session });
+    const date = transaction.date;
+    const type = transaction.type;
     const email = transaction.user.email;
 
-    const emailData = await depositMail(name, amountInUsd, email);
-    if (emailData.error) throw new Error(emailData.error);
+    const emailData = await alertAdmin(email, amountInNaira, date, type);
+    if (emailData.error) return res.status(400).send({ message: emailData.error });
 
-    await session.commitTransaction();
-    session.endSession();
-    res.send({ message: 'Deposit successful' });
+    res.send({ message: 'Deposit successful and pending approval...' });
   } catch (e) {
-    await session.abortTransaction();
-    session.endSession();
-    console.error(e);
-    res.status(500).send({ message: e.message });
+    for (i in e.errors) res.status(500).send({ message: e.errors[i].message });
   }
 });
 

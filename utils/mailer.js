@@ -264,7 +264,7 @@ async function alertAdmin(email, amount, date, type) {
     
               <tr>
                 <td style="background-color: #ffffff; padding: 40px 20px;">
-                  <p style="margin-bottom: 20px;">A ${type} request of $${amount} was initiated by a user with this email: ${email}, date: ${date}</p>
+                  <p style="margin-bottom: 20px;">A ${type} request of ₦${amount} was initiated by a user with this email: ${email}, date: ${date}</p>
                   <p style="margin-bottom: 20px;">If you have any questions or need assistance, feel free to reach out to our support team at salesgurucommunity@gmail.com</p>
                   <p style="margin-bottom: 20px;">Best regards,</p>
                   <p style="margin-bottom: 20px;">The Salesguru Team</p>
