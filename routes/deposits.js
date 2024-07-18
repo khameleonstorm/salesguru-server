@@ -97,9 +97,8 @@ router.put('/:id', async (req, res) => {
     deposit = await deposit.save()
 
     const { fullName, email } = user;
-    const { date } = deposit;
 
-    const emailData = await depositMail(fullName, amount, date, email);
+    const emailData = await depositMail(fullName, amount, email);
     if (emailData.error) return res.status(400).send({ message: emailData.error });
 
     res.send({ message: 'Deposit successfully updated' });
