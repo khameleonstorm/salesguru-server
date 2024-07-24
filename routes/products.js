@@ -36,7 +36,7 @@ router.get("/user/:userId", async (req, res) => {
 
 // Creating a product
 router.post("/user/:userId", async (req, res) => {
-  const { name, buyPrice, sellPrice, quantity } = req.body;
+  const { name, buyPrice, sellPrice, quantity, duration } = req.body;
   const userId = req.params.userId;
 
   const session = await mongoose.startSession();
@@ -57,7 +57,7 @@ router.post("/user/:userId", async (req, res) => {
     // Create a new product transaction
     const product = new Transaction({
       user: { id: userId, name: user.fullName, email: user.email },
-      productData: { name, buyPrice, sellPrice, quantity },
+      productData: { name, buyPrice, sellPrice, quantity, duration },
       type: "product",
       amount: buyPrice,
     });
@@ -65,7 +65,7 @@ router.post("/user/:userId", async (req, res) => {
     await product.save({ session });
 
     // Send product email
-    await productAlertMail(name, user.email, buyPrice, sellPrice, quantity);
+    await productAlertMail(name, user.email, buyPrice, sellPrice, quantity, duration);
 
     await session.commitTransaction();
     session.endSession();
@@ -99,72 +99,21 @@ router.put("/:id", async (req, res) => {
       return res.status(400).send({ message: "Transaction not found" });
     }
 
-    const currentDate = new Date();
-    const transactionDate = new Date(transaction.date);
-    const diffTime = Math.abs(currentDate - transactionDate);
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    const user = await User.findById(transaction.user.id).session(session);
 
-    if (diffDays > 14) {
-      const user = await User.findById(transaction.user.id).session(session);
-      if (user) {
-        const calculatedInterest = transaction.productData.sellPrice;
-        user.interest += calculatedInterest;
-        await user.save({ session });
-      }
-
-      transaction.status = "success";
-      await transaction.save({ session });
-    } else {
-      await session.abortTransaction();
-      session.endSession();
-      return res.status(400).send({ message: "Product Is Less Than 14 days" });
+    if (user) {
+      const calculatedInterest = transaction.productData.sellPrice - transaction.productData.buyPrice;
+      user.interest += calculatedInterest;
+      user.deposit += transaction.productData.buyPrice;
+      await user.save({ session });
     }
+
+    transaction.status = "success";
+    await transaction.save({ session });
 
     await session.commitTransaction();
     session.endSession();
     res.send({ message: "Product and user interest successfully updated" });
-  } catch (error) {
-    await session.abortTransaction();
-    session.endSession();
-    console.error(error);
-    res.status(500).send({ message: "Internal Server Error" });
-  }
-});
-
-
-// Updating products and user interests
-router.put("/multiple", async (req, res) => {
-  const session = await mongoose.startSession();
-  session.startTransaction();
-
-  try {
-    const pendingTransactions = await Transaction.find({
-      status: "pending",
-      type: "product",
-    }).session(session);
-    const currentDate = new Date();
-
-    for (const transaction of pendingTransactions) {
-      const transactionDate = new Date(transaction.date);
-      const diffTime = Math.abs(currentDate - transactionDate);
-      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-      if (diffDays > 14) {
-        const user = await User.findById(transaction.user.id).session(session);
-        if (user) {
-          const calculatedInterest = transaction.productData.sellPrice;
-          user.interest += calculatedInterest;
-          await user.save({ session });
-        }
-
-        transaction.status = "success";
-        await transaction.save({ session });
-      }
-    }
-
-    await session.commitTransaction();
-    session.endSession();
-    res.send({ message: "Products and user interests successfully updated" });
   } catch (error) {
     await session.abortTransaction();
     session.endSession();

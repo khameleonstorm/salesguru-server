@@ -76,6 +76,10 @@ const transactionSchema = new mongoose.Schema({
       type: String,
       default: '',
     },
+    duration: {
+      type: String,
+      default: '',
+    },
     buyPrice: {
       type: Number,
       default: 0,
