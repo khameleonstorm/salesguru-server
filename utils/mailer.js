@@ -75,7 +75,7 @@ async function welcomeMail(userEmail) {
                   <td style="background-color: #ffffff; padding: 40px 20px;">
                     <p style="margin-bottom: 20px;">Hello</p>
                     <p style="margin-bottom: 20px;">We're thrilled to have you as part of our community. At Salesguru, we are dedicated to providing the best services and support to our customers.</p>
-                    <p style="margin-bottom: 20px;">If you have any questions or need assistance, feel free to reach out to our support team at salesgurucommunity@gmail.com.</p>
+                    <p style="margin-bottom: 20px;">If you have any questions or need assistance, feel free to reach out to our support team at ${process.env.SMTP_USER}.</p>
                     <p style="margin-bottom: 20px;">Best regards,</p>
                     <p style="margin-bottom: 20px;">The Salesguru Team</p>
                   </td>
@@ -139,7 +139,7 @@ async function otpMail(userEmail, otp) {
                   <p style="margin-bottom: 20px;">Your verification code is:</p>
                   <p style="margin-bottom: 20px; font-size: 22px !important; font-weight: 600 !important; color: #114000 !important; letter-spacing: 2px !important;">${otp}</p>
                   <p style="margin-bottom: 20px;">Copy and paste the above code into the form on the website to continue. This code expires in 5 minutes.</p>
-                  <p style="margin-bottom: 20px;">If you have any questions or need assistance, feel free to reach out to our support team at salesgurucommunity@gmail.com.</p>
+                  <p style="margin-bottom: 20px;">If you have any questions or need assistance, feel free to reach out to our support team at ${process.env.SMTP_USER}.</p>
                   <p style="margin-bottom: 20px;">Best regards,</p>
                   <p style="margin-bottom: 20px;">The Salesguru Team</p>
                 </td>
@@ -203,7 +203,7 @@ async function passwordReset(userEmail) {
                     <p style="margin-bottom: 20px;">Hello</p>
                     <p style="margin-bottom: 20px;">A request was sent for password reset, if this wasn't you please contact our customer service. Click the reset link below to proceed</p>
                     <a style="max-width: 200px; padding: 15px 30px; border-radius: 30px; background-color: #114000 !important; color: #fafafa !important; text-decoration: none;" href="https://prowealth-inc.com/forgotPassword/newPassword">Reset Password</a>
-                    <p style="margin: 20px 0;">If you have any questions or need assistance, feel free to reach out to our support team at salesgurucommunity@gmail.com</p>
+                    <p style="margin: 20px 0;">If you have any questions or need assistance, feel free to reach out to our support team at ${process.env.SMTP_USER}</p>
                     <p style="margin-bottom: 20px;">Best regards,</p>
                     <p style="margin-bottom: 20px;">The Salesguru Team</p>
                   </td>
@@ -239,7 +239,7 @@ async function alertAdmin(email, amount, date, type) {
 
     let mailOptions = {
       from: `Salesguru ${process.env.SMTP_USER}`,
-      to: `salesgurucommunity@gmail.com`,
+      to: `${process.env.SMTP_USER}`,
       subject: "Admin Alert!",
       html: `
     <!DOCTYPE html>
@@ -265,7 +265,7 @@ async function alertAdmin(email, amount, date, type) {
               <tr>
                 <td style="background-color: #ffffff; padding: 40px 20px;">
                   <p style="margin-bottom: 20px;">A ${type} request of ₦${amount} was initiated by a user with this email: ${email}, date: ${date}</p>
-                  <p style="margin-bottom: 20px;">If you have any questions or need assistance, feel free to reach out to our support team at salesgurucommunity@gmail.com</p>
+                  <p style="margin-bottom: 20px;">If you have any questions or need assistance, feel free to reach out to our support team at ${process.env.SMTP_USER}</p>
                   <p style="margin-bottom: 20px;">Best regards,</p>
                   <p style="margin-bottom: 20px;">The Salesguru Team</p>
                 </td>
@@ -328,7 +328,7 @@ async function depositMail(fullName, amount, email) {
                   <td style="background-color: #ffffff; padding: 40px 20px;">
                     <p style="margin-bottom: 20px;">Dear ${fullName}</p>
                     <p style="margin-bottom: 20px;">Your deposit of <strong>$${amount}</strong> was successful! Your can now use your funds to trade on Salesguru.</p>
-                    <p style="margin-bottom: 20px;">If you have any questions or need assistance, feel free to reach out to our support team at salesgurucommunity@gmail.com</p>
+                    <p style="margin-bottom: 20px;">If you have any questions or need assistance, feel free to reach out to our support team at ${process.env.SMTP_USER}</p>
                     <p style="margin-bottom: 20px;">Best regards,</p>
                     <p style="margin-bottom: 20px;">The Salesguru Team</p>
                   </td>
@@ -391,7 +391,7 @@ async function withdrawalMail(fullName, amount, date, email) {
                   <td style="background-color: #ffffff; padding: 40px 20px;">
                     <p style="margin-bottom: 20px;">Dear ${fullName}</p>
                     <p style="margin-bottom: 20px;">Your Withdrawal of <strong>${amount}</strong>, ${date}, was successful! Thanks for choosing Salesguru!</p>
-                    <p style="margin-bottom: 20px;">If you have any questions or need assistance, feel free to reach out to our support team at salesgurucommunity@gmail.com</p>
+                    <p style="margin-bottom: 20px;">If you have any questions or need assistance, feel free to reach out to our support team at ${process.env.SMTP_USER}</p>
                     <p style="margin-bottom: 20px;">Best regards,</p>
                     <p style="margin-bottom: 20px;">The Salesguru Team</p>
                   </td>
@@ -498,7 +498,7 @@ async function contactMail(fullName, email, message) {
     await verifyTransporter();
     let mailOptions = {
       from: `Salesguru ${process.env.SMTP_USER}`,
-      to: `salesgurucommunity@gmail.com`,
+      to: `${process.env.SMTP_USER}`,
       subject: `New Message From ${fullName}`,
       html: `
       <!DOCTYPE html>
